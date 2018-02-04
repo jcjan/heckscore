@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
 
-  resources :players
+  resources :players, :games
 
   root 'home#index'
 
