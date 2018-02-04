@@ -6,3 +6,11 @@
   <strong>Date:</strong>
   <%= @game.date %>
 </p>
+<p>
+  <strong>Players:</strong>
+  <ul>
+    <% @game.game_players.each do |game_player| %>
+      <li><%= game_player.player.name %></li>
+    <% end %>
+  </ul>
+</p>
