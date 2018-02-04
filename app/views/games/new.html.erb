@@ -22,6 +22,11 @@
 </p>
 
 <p>
+  <%= form.label :size %><br>
+  <%= form.select :size, options_for_select(3..8) %>
+</p>
+
+<p>
   <%= form.submit %>
 </p>
 <% end %>
