@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  position: 1
+  bid: 1
+  tricks: 1
+  hand: one
+  game_player: one
+
+two:
+  position: 1
+  bid: 1
+  tricks: 1
+  hand: two
+  game_player: two
