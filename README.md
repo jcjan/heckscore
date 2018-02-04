@@ -1,24 +1,5 @@
-# README
+# HeckScore
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+HeckScore is a score-keeping app for the card game Oh Heck (which goes by many other names too - https://en.wikipedia.org/wiki/Oh_Hell)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+It is also a Django developer's first attempt at a Rails app.
