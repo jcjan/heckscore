@@ -1,9 +1,33 @@
 <h1>ScoreHeck!</h1>
 
 <h3>Players</h3>
-<table>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.id %></td>
+      <td><%= player.name %></td>
+      <td><%= link_to 'Show', player_path(player) %></td>
+    </tr>
+  <% end %>
 </table>
 
 <h3>Games</h3>
-<table>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Date</th>
+  </tr>
+
+  <% @games.each do |game| %>
+    <tr>
+      <td><%= game.id %></td>
+      <td><%= game.date %></td>
+    </tr>
+  <% end %>
 </table>
