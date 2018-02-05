@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     if @game.save
-      redirect_to '/'
+      redirect_to action: "add_players", id: @game.id
     else
       render 'new'
     end
@@ -30,8 +30,13 @@ class GamesController < ApplicationController
     end
   end
 
+  def add_players
+    @game = Game.find(params[:id])
+  end
+
+
   private
     def game_params
-      params.require(:game).permit(:date)
+      params.require(:game).permit(:date, :size)
     end
 end
