@@ -5,7 +5,7 @@ class Game < ApplicationRecord
   after_create_commit :create_hands
 
   def max_hand_size
-    return 52 / self.size
+    return 51 / self.size
   end
 
   def hand_count
