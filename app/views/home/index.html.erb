@@ -34,6 +34,7 @@
       <th>ID</th>
       <th>Players</th>
       <th>Date</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
@@ -43,6 +44,7 @@
       <td><%= game.id %></td>
       <td><%= game.size %></td>
       <td><%= game.date %></td>
+      <td><%= game.status %></td>
       <td><%= link_to 'Show', game_path(game) %></td>
     </tr>
     <% end %>
@@ -50,6 +52,7 @@
   <tfoot>
     <tr>
       <td><%= link_to 'New Game', new_game_path %></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
