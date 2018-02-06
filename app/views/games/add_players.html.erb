@@ -1,11 +1,16 @@
-<%= form_with scope: :game_player, url: game_players_path, local: true do |form| %>
-  <input type="hidden" name="game_player[game_id]" value="<%= @game.id %>" />
-  <input type="hidden" name="game_player[position]" value="0" />
-  <select name="game_player[player_id]">
-      <% Player.all.each do |player| %>
-          <option value="<%= player.id %>"><%= player.name %></option>
-      <% end %>
-  </select>
+<% @game.game_players.each do |game_player| %>
+Player <%= game_player.position + 1 %>: <%= game_player.player.name %><br>
+<% end %>
+<% if @game.next_position %>
+  <%= form_with scope: :game_player, url: game_players_path, local: true do |form| %>
+    <input type="hidden" name="game_player[game_id]" value="<%= @game.id %>" />
+    <input type="hidden" name="game_player[position]" value="<%= @game.next_position %>" />
+    <select name="game_player[player_id]">
+        <% Player.all.each do |player| %>
+            <option value="<%= player.id %>"><%= player.name %></option>
+        <% end %>
+    </select>
 
-  <%= form.submit %>
+    <%= form.submit %>
+  <% end %>
 <% end %>

@@ -2,6 +2,7 @@ class GamePlayersController < ApplicationController
   def create
     game = Game.find(params[:game_player][:game_id])
     @game_player = game.game_players.create(game_player_params)
+    redirect_to :controller => 'games', :action => 'add_players', :id => game.id
   end
 
   private

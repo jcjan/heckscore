@@ -31,6 +31,15 @@ class Game < ApplicationRecord
     end
   end
 
+  def next_position
+    c = self.players.count
+    if c < self.size
+      return self.players.count
+    else
+      return nil
+    end
+  end
+
   def create_hands
     for p in 0..self.hand_count
       Hand.create(game: self, position: p)
