@@ -19,10 +19,13 @@ class Game < ApplicationRecord
 
   def status
     player_hand_count = self.hand_players.count
+    # no hands have been entered
     if player_hand_count == 0
       return "not started"
+    # some hands have been entered
     elsif player_hand_count < self.max_player_hand_count
       return "in progress"
+    # all hands have been entered
     else
       return "completed"
     end
