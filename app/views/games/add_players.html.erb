@@ -1,5 +1,11 @@
-<%= form_with model: @game_player do |form| %>
-  <%= form.label :date %><br>
-  <%= form.text_field :email %>
+<%= form_with scope: :game_player, url: game_players_path, local: true do |form| %>
+  <input type="hidden" name="game_player[game_id]" value="<%= @game.id %>" />
+  <input type="hidden" name="game_player[position]" value="0" />
+  <select name="game_player[player_id]">
+      <% Player.all.each do |player| %>
+          <option value="<%= player.id %>"><%= player.name %></option>
+      <% end %>
+  </select>
+
   <%= form.submit %>
 <% end %>
