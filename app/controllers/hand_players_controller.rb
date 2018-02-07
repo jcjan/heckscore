@@ -1,0 +1,2 @@
+class HandPlayersController < ApplicationController
+end

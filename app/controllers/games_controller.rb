@@ -34,6 +34,12 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def score
+    @game = Game.includes(:players,
+                          :hands,
+                          :hands => :hand_players).find(params[:id])
+  end
+
   private
     def game_params
       params.require(:game).permit(:date, :size)
