@@ -10,12 +10,12 @@ class Game < ApplicationRecord
     return 51 / self.size
   end
 
-  def hand_count
+  def total_hands
     return (self.max_hand_size * 2) - 2
   end
 
   def max_player_hand_count
-    return self.size * self.hand_count
+    return self.size * self.total_hands
   end
 
   def current_hand
@@ -52,8 +52,9 @@ class Game < ApplicationRecord
   end
 
   def create_hands
-    for p in 0..self.hand_count
-      Hand.create(game: self, position: p)
+    for p in 0..self.total_hands
+      h = Hand.create(game: self, position: p)
+      puts(h.errors.full_messages)
     end
   end
 end

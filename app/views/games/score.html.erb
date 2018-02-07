@@ -1,7 +1,21 @@
+<% if !@game.current_hand.dealer %>
+  who dealt the next hand?
+  <%= form_for(@game.current_hand) do |form| %>
+    <select name="hand[dealer_id]">
+        <% @game.game_players.each do |gp| %>
+            <option value="<%= gp.id %>"><%= gp.player.name %></option>
+        <% end %>
+    </select>
+    <%= form.submit %>
+  <% end %>
+<% end %>
+
+
 <table class="table">
   <thead>
     <tr>
       <th>Cards</th>
+      <th>Dealer</th>
       <% @game.game_players.each do |gp| %>
         <th><%= gp.player.name %></th>
       <% end %>
@@ -11,6 +25,11 @@
     <% @game.hands.each do |hand| %>
       <tr>
         <td><%= hand.card_count %></td>
+        <td>
+          <% if hand.dealer %>
+            <%= hand.dealer.player.name %>
+          <% end %>
+        </td>
         <% hand.hand_players.each do |hp| %>
           <td style="<%= 'color: red' if hp.got_set %>">
             <%= hp.bid %> - <%= hp.tricks %> | <%= hp.game_score %>

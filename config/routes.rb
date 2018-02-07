@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
 
-  resources :players, :games, :game_players, :hand_players
+  resources :players, :games, :hands, :game_players, :hand_players
 
   get 'games/:id/add_players', to: 'games#add_players'
   get 'games/:id/score', to: 'games#score'
