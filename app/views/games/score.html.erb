@@ -12,7 +12,9 @@
       <tr>
         <td><%= hand.card_count %></td>
         <% hand.hand_players.each do |hp| %>
-          <td><%= hp.bid %></td>
+          <td style="<%= 'color: red' if hp.got_set %>">
+            <%= hp.bid %> - <%= hp.tricks %> | <%= hp.game_score %>
+          </td>
         <% end %>
       </tr>
     <% end %>
