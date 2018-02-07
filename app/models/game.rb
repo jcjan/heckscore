@@ -18,6 +18,16 @@ class Game < ApplicationRecord
     return self.size * self.hand_count
   end
 
+  def current_hand
+    last_hand = self.hand_players.where(position: self.size - 1).last
+    if !last_hand
+      current_hand = self.hands.first
+    else
+      current_hand = self.hands.where(position: last_hand.position + 1).first
+    end
+    return current_hand
+  end
+
   def status
     player_hand_count = self.hand_players.count
     # no hands have been entered
