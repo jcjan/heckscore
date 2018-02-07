@@ -1,11 +1,8 @@
 class HandsController < ApplicationController
   def update
     @hand = Hand.find(params[:id])
-    if @hand.update_attributes(hand_params)
-      # Handle a successful update.
-    else
-      render 'edit'
-    end
+    @hand.update_attributes(hand_params)
+    redirect_to :controller => 'games', :action => 'score', :id => @hand.game.id
   end
 
   private
