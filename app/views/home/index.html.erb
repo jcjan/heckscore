@@ -4,7 +4,6 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +11,6 @@
     <tr>
       <td><%= player.id %></td>
       <td><%= player.name %></td>
-      <td><%= link_to 'Show', player_path(player) %></td>
     </tr>
     <% end %>
   </tbody>
@@ -33,23 +31,30 @@
       <th>Players</th>
       <th>Date</th>
       <th>Status</th>
-      <th></th>
+      <th>Winner</th>
     </tr>
   </thead>
   <tbody>
     <% @games.each do |game| %>
     <tr>
-      <td><%= game.id %></td>
+      <td><a href="/games/<%= game.id %>/score"><%= game.id %></a></td>
       <td><%= game.size %></td>
       <td><%= game.date %></td>
       <td><%= game.status %></td>
-      <td><%= link_to 'Show', game_path(game) %></td>
+      <td>
+        <% if game.winner %>
+          <%= game.winner.name %>
+        <% else %>
+          -
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
       <td><%= link_to 'New Game', new_game_path %></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
