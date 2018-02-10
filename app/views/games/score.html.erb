@@ -1,13 +1,29 @@
-<% if !@game.current_hand.dealer %>
-  who dealt the next hand?
-  <%= form_for(@game.current_hand) do |form| %>
-    <select name="hand[dealer_id]">
+<% if !@game.first_dealer %>
+  who dealt first?
+  <%= form_for(@game) do |form| %>
+    <select name="game[first_dealer_id]">
         <% @game.game_players.each do |gp| %>
             <option value="<%= gp.id %>"><%= gp.player.name %></option>
         <% end %>
     </select>
     <%= form.submit %>
   <% end %>
+<% else %>
+  what did <%= @game.current_player.player.name %> score?
+  <div>
+    <%= form_for(@game.current_hand_player) do |f| %>
+      <input type="hidden" name="hand_player[position]" value="<%= @game.current_hand_position %>" />
+      <p>
+        <%= f.label :bid %><br>
+        <%= f.number_field :bid %>
+      </p>
+      <p>
+        <%= f.label :tricks %><br>
+        <%= f.number_field :tricks %>
+      </p>
+      <%= f.submit %>
+    <% end %>
+  </div>
 <% end %>
 
 
@@ -30,10 +46,15 @@
             <%= hand.dealer.player.name %>
           <% end %>
         </td>
+
         <% hand.hand_players.each do |hp| %>
-          <td style="<%= 'color: red' if hp.got_set %>">
-            <%= hp.bid %> - <%= hp.tricks %> | <%= hp.game_score %>
-          </td>
+          <% if hp.bid %>
+            <td style="<%= 'color: red' if hp.got_set %>">
+              <%= hp.bid %> - <%= hp.tricks %> | <%= hp.game_score %>
+            </td>
+          <% else %>
+            <td>-</td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
