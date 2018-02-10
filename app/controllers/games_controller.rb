@@ -34,6 +34,9 @@ class GamesController < ApplicationController
     @game = Game.includes(:players,
                           :hands,
                           :hands => :hand_players).find(params[:id])
+    if @game.game_players.count < @game.size
+      redirect_to action: "add_players", id: @game.id
+    end
     @current_player = @game.current_player
     @current_hand_player = @game.current_hand_player
   end
