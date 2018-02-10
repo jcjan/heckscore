@@ -51,6 +51,9 @@ class Game < ApplicationRecord
   # we are currently scoring. `0` is the first person,
   # on the score sheet, `1` is to that person's left, etc.
   def current_game_player_position
+    if not self.current_hand.dealer
+      return 0
+    end
     p = self.current_hand.dealer.position - (self.still_to_play.count - 1)
     if p < 0
       p = self.size + p
