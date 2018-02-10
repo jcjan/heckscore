@@ -31,18 +31,26 @@ class GameTest < ActiveSupport::TestCase
     gp2 = g.game_players.create(player: p2)
     gp3 = g.game_players.create(player: p3)
 
+    hp1 = HandPlayer.where(game_player: gp1).first
+    hp2 = HandPlayer.where(game_player: gp2).first
+    hp3 = HandPlayer.where(game_player: gp3).first
+
     h = Hand.where(position: 0, game: g).first
     assert_equal(h, g.current_hand)
 
-    h.hand_players.create(game_player: gp1, position: 0)
+    hp1.bid = 0
+    hp1.save
 
     # `h` should be the current hand until
     # all three players have a `hand_player`
     # for `h`
     assert_equal(h, g.current_hand)
 
-    h.hand_players.create(game_player: gp2, position: 1)
-    h.hand_players.create(game_player: gp3, position: 2)
+    hp2.bid = 1
+    hp2.save
+    hp3.bid = 0
+    hp3.save
+
     h2 = Hand.where(position: 1, game: g).first
 
     assert_equal(h2, g.current_hand)
