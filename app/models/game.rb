@@ -74,6 +74,9 @@ class Game < ApplicationRecord
 
   # Returns the `GamePlayer` that is currently being scored
   def current_player
+    if self.hand_players.where(bid: nil).empty?
+      return nil
+    end
     gp = self.still_to_play.where(position: self.current_game_player_position).first
     return gp
   end

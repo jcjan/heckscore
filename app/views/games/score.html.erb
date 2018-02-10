@@ -1,4 +1,6 @@
-<% if !@game.first_dealer %>
+<% if !@game.current_player %>
+  the game has ended!!
+<% elsif !@game.first_dealer %>
   who dealt first?
   <%= form_for(@game) do |form| %>
     <select name="game[first_dealer_id]">
@@ -9,9 +11,9 @@
     <%= form.submit %>
   <% end %>
 <% else %>
-  what did <%= @game.current_player.player.name %> score?
+  what did <%= @current_player.player.name %> score?
   <div>
-    <%= form_for(@game.current_hand_player) do |f| %>
+    <%= form_for(@current_hand_player) do |f| %>
       <input type="hidden" name="hand_player[position]" value="<%= @game.current_hand_position %>" />
       <p>
         <%= f.label :bid %><br>
@@ -41,7 +43,7 @@
     <% @game.hands.each do |hand| %>
       <tr>
         <td><%= hand.card_count %></td>
-        <td>
+        <td style="color: grey">
           <% if hand.dealer %>
             <%= hand.dealer.player.name %>
           <% end %>
@@ -53,7 +55,7 @@
               <%= hp.bid %> - <%= hp.tricks %> | <%= hp.game_score %>
             </td>
           <% else %>
-            <td>-</td>
+            <td style="<%= 'background-color: yellow' if hp == @current_hand_player %>">-</td>
           <% end %>
         <% end %>
       </tr>

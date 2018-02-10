@@ -8,6 +8,10 @@ class Hand < ApplicationRecord
   # The dealer moves one position to the left
   # with each new hand.
   def dealer
+    first_dealer = self.game.first_dealer
+    if not first_dealer
+      return nil
+    end
     first_dealer_position = self.game.first_dealer.position
     p = self.position + first_dealer_position
     while p > self.game.size - 1

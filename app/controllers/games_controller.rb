@@ -38,6 +38,8 @@ class GamesController < ApplicationController
     @game = Game.includes(:players,
                           :hands,
                           :hands => :hand_players).find(params[:id])
+    @current_player = @game.current_player
+    @current_hand_player = @game.current_hand_player
   end
 
   private
