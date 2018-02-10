@@ -21,6 +21,10 @@ class Game < ApplicationRecord
     return self.size * self.total_hands
   end
 
+  def max_hand_position
+    return self.total_hands - 1
+  end
+
   # Returns the `Hand` that is currently being scored.
   def current_hand
     last_hand = self.hand_players.joins(:hand).reorder('hands.position ASC').where.not(bid: nil).last
@@ -90,7 +94,7 @@ class Game < ApplicationRecord
   end
 
   def status
-    player_hand_count = self.hand_players.where.not(position: nil).count
+    player_hand_count = self.hand_players.where.not(bid: nil).count
     # no hands have been entered
     if player_hand_count == 0
       return "not started"
@@ -101,6 +105,22 @@ class Game < ApplicationRecord
     else
       return "completed"
     end
+  end
+
+  def winner
+    winner = nil
+    if self.status == "completed"
+      final_hand = self.hands.where(position: self.max_hand_position).first
+      final_hand_players = self.hand_players.where(hand: final_hand)
+      score = 0
+      for hp in final_hand_players
+        if hp.game_score > score
+          winner = hp.game_player.player
+          score = hp.game_score
+        end
+      end
+    end
+    return winner
   end
 
   def next_position
