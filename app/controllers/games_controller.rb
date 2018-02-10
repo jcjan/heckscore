@@ -22,12 +22,8 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-
-    if @game.update(game_params)
-      redirect_to @game
-    else
-      render 'edit'
-    end
+    @game.update(game_params)
+    redirect_to :controller => 'games', :action => 'score', :id => @game.id
   end
 
   def add_players
